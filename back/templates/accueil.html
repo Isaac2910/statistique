@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Statistiques</title>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            margin: 0;
+            padding: 0;
+            background-color: #f4f4f9;
+        }
+        .container {
+            padding: 20px;
+            max-width: 1200px;
+            margin: 0 auto;
+        }
+        .chart-container {
+            margin: 20px 0;
+            background: #fff;
+            border-radius: 8px;
+            padding: 20px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+        }
+        h1, h2 {
+            color: #333;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h1>Statistiques des Consultations</h1>
+
+        <div class="chart-container">
+            <h2>Cas de paludisme par groupe d'âge</h2>
+            <canvas id="ageGroupChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h2>Répartition des sexes dans les consultations</h2>
+            <canvas id="sexeChart"></canvas>
+        </div>
+
+        <div class="chart-container">
+            <h2>Cas confirmés par mois</h2>
+            <canvas id="monthlyCasesChart"></canvas>
+        </div>
+    </div>
+
+    <script>
+        // Données dynamiques passées depuis Django
+        const ageGroupData = {{ age_group_data|safe }};
+        const sexeData = {{ sexe_data|safe }};
+        const monthlyCasesData = {{ monthly_cases_data|safe }};
+
+        // Chart.js configuration
+        const ctx1 = document.getElementById('ageGroupChart').getContext('2d');
+        new Chart(ctx1, {
+            type: 'bar',
+            data: {
+                labels: ageGroupData.labels,
+                datasets: [{
+                    label: 'Nombre de cas',
+                    data: ageGroupData.data,
+                    backgroundColor: ['#4caf50', '#ff9800', '#f44336', '#2196f3', '#9c27b0'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        const ctx2 = document.getElementById('sexeChart').getContext('2d');
+        new Chart(ctx2, {
+            type: 'pie',
+            data: {
+                labels: sexeData.labels,
+                datasets: [{
+                    label: 'Répartition des sexes',
+                    data: sexeData.data,
+                    backgroundColor: ['#2196f3', '#e91e63', '#ffc107'],
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    }
+                }
+            }
+        });
+
+        const ctx3 = document.getElementById('monthlyCasesChart').getContext('2d');
+        new Chart(ctx3, {
+            type: 'line',
+            data: {
+                labels: monthlyCasesData.labels,
+                datasets: [{
+                    label: 'Cas confirmés',
+                    data: monthlyCasesData.data,
+                    borderColor: '#4caf50',
+                    backgroundColor: 'rgba(76, 175, 80, 0.2)',
+                    fill: true,
+                }]
+            },
+            options: {
+                responsive: true,
+                plugins: {
+                    legend: {
+                        display: true,
+                        position: 'top',
+                    }
+                }
+            }
+        });
+    </script>
+</body>
+</html>

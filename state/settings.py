@@ -11,6 +11,7 @@ https://docs.djangoproject.com/en/5.1/ref/settings/
 """
 
 from pathlib import Path
+#import os
 
 # Build paths inside the project like this: BASE_DIR / 'subdir'.
 BASE_DIR = Path(__file__).resolve().parent.parent
@@ -31,12 +32,16 @@ ALLOWED_HOSTS = []
 # Application definition
 
 INSTALLED_APPS = [
+    'jazzmin',
+    'grappelli',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    'back',
+   
 ]
 
 MIDDLEWARE = [
@@ -54,10 +59,13 @@ ROOT_URLCONF = 'state.urls'
 TEMPLATES = [
     {
         'BACKEND': 'django.template.backends.django.DjangoTemplates',
-        'DIRS': [],
+        'DIRS': [
+           # os.path.join(BASE_DIR, 'templates')
+            ],
         'APP_DIRS': True,
         'OPTIONS': {
             'context_processors': [
+                'django.template.context_processors.request',
                 'django.template.context_processors.debug',
                 'django.template.context_processors.request',
                 'django.contrib.auth.context_processors.auth',
@@ -79,6 +87,52 @@ DATABASES = {
         'NAME': BASE_DIR / 'db.sqlite3',
     }
 }
+
+JAZZMIN_SETTINGS = {
+    "site_title": "Hosto",
+
+    # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_header": "Palu",
+
+    # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
+    "site_brand": "Palu state",
+
+    "changeform_format": "vertical",
+    "related_list_format": "grid",
+    "show_admin_comments": True,
+    "navigation_expanded": True,
+    "welcome_text": "Bienvenue dans votre application ",
+    "title": "Nature",
+    "theme": "flatly",
+    "dark_mode_theme": "darkly",
+    "logo": "fa fa-globe",
+    "header_background_color": "#333",
+    "header_title_color": "#fff",
+    "header_font_family": "Arial, sans-serif",
+    "body_background_color": "#fff",
+    "header_title": "Welcome",
+
+    "usermenu_links"
+
+    "custom_links": {
+    "books": [{
+        # Any Name you like
+        "name": "Make Messages",
+
+        # url name e.g `admin:index`, relative urls e.g `/admin/index` or absolute urls e.g `https://domain.com/admin/index`
+        "url": "make_messages",
+
+        # any font-awesome icon, see list here https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2 (optional)
+        "icon": "fas fa-comments",
+
+        # a list of permissions the user must have to see this link (optional)
+        "permissions": ["books.view_book"]     
+    }]
+    },
+
+
+}
+
 
 
 # Password validation
@@ -103,7 +157,7 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
-LANGUAGE_CODE = 'en-us'
+LANGUAGE_CODE = 'fr'
 
 TIME_ZONE = 'UTC'
 
