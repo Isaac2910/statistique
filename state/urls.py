@@ -25,7 +25,7 @@ from django.conf import settings
 
 urlpatterns = [
     path('', admin.site.urls),
-    path('grappelli/', include('grappelli.urls')),
+   # path('grappelli/', include('grappelli.urls')),
     path('accueil', views.accueil, name='accueil'),
     #path('i18n/', include('django.conf.urls.i18n')),
     #path("admin/custom/", views.custom_admin_view, name="custom_admin"),
