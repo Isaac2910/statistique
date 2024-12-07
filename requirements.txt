@@ -81,7 +81,7 @@ six==1.16.0
 sqlparse==0.5.1
 systemd-python==234
 typing_extensions==4.12.2
-ubuntu-drivers-common==0.0.0
+
 ubuntu-pro-client==8001
 ufw==0.36.1
 unattended-upgrades==0.1
