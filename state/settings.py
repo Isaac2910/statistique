@@ -26,7 +26,7 @@ SECRET_KEY = 'django-insecure-04xh5$r!-$l0vgzhzf1c2*$e9j1l7_i-a5x^tx$p&0vb36@77(
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = True
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ['*']
 
 
 # Application definition
@@ -45,6 +45,8 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'whitenoise.middleware.WhiteNoiseMiddleware',
+    'django.middleware.locale.LocaleMiddleware',
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -89,13 +91,24 @@ DATABASES = {
 }
 
 JAZZMIN_SETTINGS = {
+
+    "topmenu_links": [
+    {"name": "Tableau de Bord", "url": "custom_admin", "permissions": ["auth.view_user"]},
+    ],
+
+    "theme": "darkly",
     "site_title": "Hosto",
 
     # Title on the login screen (19 chars max) (defaults to current_admin_site.site_header if absent or None)
     "site_header": "Palu",
 
     # Title on the brand (19 chars max) (defaults to current_admin_site.site_header if absent or None)
-    "site_brand": "Palu state",
+    "site_brand": "Palu Guard",
+    "site_logo": "images/logo.svg",
+
+    "custom_css": "css/custom.css",
+
+    #"custom_js": "js/custom.js",
 
     "changeform_format": "vertical",
     "related_list_format": "grid",
@@ -103,7 +116,7 @@ JAZZMIN_SETTINGS = {
     "navigation_expanded": True,
     "welcome_text": "Bienvenue dans votre application ",
     "title": "Nature",
-    "theme": "flatly",
+    "theme": "sketchy",
     "dark_mode_theme": "darkly",
     "logo": "fa fa-globe",
     "header_background_color": "#333",
@@ -111,27 +124,23 @@ JAZZMIN_SETTINGS = {
     "header_font_family": "Arial, sans-serif",
     "body_background_color": "#fff",
     "header_title": "Welcome",
+    "topmenu_links": [
+        # Lien vers votre site
+        {"name": "Voir les statistiques", "url": "/", "new_window": True},
+    ],
 
-    "usermenu_links"
 
-    "custom_links": {
-    "books": [{
-        # Any Name you like
-        "name": "Make Messages",
 
-        # url name e.g `admin:index`, relative urls e.g `/admin/index` or absolute urls e.g `https://domain.com/admin/index`
-        "url": "make_messages",
-
-        # any font-awesome icon, see list here https://fontawesome.com/icons?d=gallery&m=free&v=5.0.0,5.0.1,5.0.10,5.0.11,5.0.12,5.0.13,5.0.2,5.0.3,5.0.4,5.0.5,5.0.6,5.0.7,5.0.8,5.0.9,5.1.0,5.1.1,5.2.0,5.3.0,5.3.1,5.4.0,5.4.1,5.4.2,5.13.0,5.12.0,5.11.2,5.11.1,5.10.0,5.9.0,5.8.2,5.8.1,5.7.2,5.7.1,5.7.0,5.6.3,5.5.0,5.4.2 (optional)
-        "icon": "fas fa-comments",
-
-        # a list of permissions the user must have to see this link (optional)
-        "permissions": ["books.view_book"]     
-    }]
-    },
 
 
 }
+
+
+
+import os
+
+MEDIA_URL = '/media/'
+MEDIA_ROOT = os.path.join(BASE_DIR, 'media')
 
 
 
@@ -157,6 +166,8 @@ AUTH_PASSWORD_VALIDATORS = [
 # Internationalization
 # https://docs.djangoproject.com/en/5.1/topics/i18n/
 
+
+
 LANGUAGE_CODE = 'fr'
 
 TIME_ZONE = 'UTC'
@@ -170,6 +181,10 @@ USE_TZ = True
 # https://docs.djangoproject.com/en/5.1/howto/static-files/
 
 STATIC_URL = 'static/'
+
+STATICFILES_DIRS = [
+    BASE_DIR / "static",
+]
 
 # Default primary key field type
 # https://docs.djangoproject.com/en/5.1/ref/settings/#default-auto-field

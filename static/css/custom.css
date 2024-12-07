@@ -1,0 +1,18 @@
+/* custom.css */
+
+/* Définir l'image en arrière-plan pour tout le corps de la page */
+body {
+    background-image: url('/static/images/bg.jpeg');  /* Remplacez le chemin par l'image de votre choix */
+    background-size: cover;  /* L'image couvre toute la surface */
+    background-position: center center;  /* Centrer l'image */
+    background-attachment: fixed;  /* Fixe l'image au fond lorsque l'utilisateur fait défiler la page */
+    background-repeat: no-repeat;  /* Empêche la répétition de l'image */
+}
+
+/* Optionnel : Ajouter un fond uni avec une opacité pour améliorer la lisibilité */
+.main-content {
+    background-color: rgba(255, 255, 255, 0.8);  /* Un fond blanc semi-transparent */
+}
+
+/* custom.css */
+/**** Style global de la page de connexion ****/

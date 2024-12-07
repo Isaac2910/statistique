@@ -33,3 +33,4 @@ def accueil(request):
         },
     }
     return render(request, 'accueil.html', context)
+
