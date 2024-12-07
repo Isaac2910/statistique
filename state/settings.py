@@ -126,7 +126,7 @@ JAZZMIN_SETTINGS = {
     "header_title": "Welcome",
     "topmenu_links": [
         # Lien vers votre site
-        {"name": "Voir les statistiques", "url": "/", "new_window": True},
+        {"name": "Voir les statistiques", "url": "accueil/", "new_window": True},
     ],
 
 

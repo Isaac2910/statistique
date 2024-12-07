@@ -16,17 +16,19 @@ Including another URLconf
 """
 from django.contrib import admin
 from django.urls import path, include
-from back import views
+
 #from django.conf.urls.i18n import i18n_patterns
-from django.urls import path, include
+from django.urls import path #include
 from django.conf.urls.static import static
 from django.conf import settings
+from back import views
 
 
 urlpatterns = [
+    path('accueil/', views.accueil, name='accueil'),
     path('', admin.site.urls),
-   # path('grappelli/', include('grappelli.urls')),
-    path('accueil', views.accueil, name='accueil'),
+    #path('grappelli/', include('grappelli.urls')),
+
     #path('i18n/', include('django.conf.urls.i18n')),
     #path("admin/custom/", views.custom_admin_view, name="custom_admin"),
 ]
